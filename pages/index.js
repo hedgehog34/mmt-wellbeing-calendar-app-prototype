@@ -1,65 +1,81 @@
 import Head from 'next/head'
-import styles from '../styles/Home.module.css'
+import Link from 'next/link'
+import { Heading, Grid, Square } from '@chakra-ui/react'
 
-export default function Home() {
+import { getSortedMonthsData } from '../lib/months'
+
+import Layout, { siteTitle } from '../components/layout'
+
+const cardHeaderStyling = {
+  as: 'h3',
+  w: '100%',
+  size: '3xl',
+  textTransform: 'uppercase',
+  textAlign: 'center',
+  position: 'relative',
+  zIndex: 2,
+  _after: {
+    content: '""',
+    display: 'block',
+    height: { base: '52px', md: '60px'},
+    width: '100%',
+    background: '#FFD803',
+    position: 'absolute',
+    top: { base: 0, md: '4px'},
+    zIndex: -1,
+    transform: 'skewX(-20deg) rotate(-5deg)',
+  }
+}
+
+const gridStyles = {
+  gap: 5,
+  templateColumns: {
+    base: 'repeat(3, 1fr)',
+    md: 'repeat(4, 1fr)',
+    lg: 'repeat(6, 1fr)',
+  }
+}
+
+export default function Home({ allMonthsData }) {
   return (
-    <div className={styles.container}>
+    <Layout home>
       <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
+        <title>{siteTitle}</title>
+        <link rel='icon' href='/favicon.ico' />
       </Head>
 
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
+      <main>
+        <Grid {...gridStyles}>
+          {allMonthsData.map(({ id, title }) => {
+            const truncatedTitle = `${title.substring(0, 3)}.`
 
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
+            return (
+              <Link href={`/months/${id}`} key={id}>
+                <a>
+                  <Square w='100%' h='200px' bg='white' overflow='visible' isTruncated>
+                    <Heading {...cardHeaderStyling}>
+                      {truncatedTitle}
+                    </Heading>
+                  </Square>
+                </a>
+              </Link>
+            )
+          })}
+        </Grid>
       </main>
 
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-        </a>
+      <footer>
+        
       </footer>
-    </div>
+    </Layout>
   )
+}
+
+export async function getStaticProps() {
+  const allMonthsData = getSortedMonthsData()
+  return {
+    props: {
+      allMonthsData
+    }
+  }
 }

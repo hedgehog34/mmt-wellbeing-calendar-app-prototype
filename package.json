@@ -11,5 +11,20 @@
     "next": "10.0.3",
     "react": "17.0.1",
     "react-dom": "17.0.1"
+  },
+  "devDependencies": {
+    "@chakra-ui/react": "^1.1.1",
+    "@emotion/react": "^11.1.4",
+    "@emotion/styled": "^11.0.0",
+    "classnames": "^2.2.6",
+    "date-fns": "^2.16.1",
+    "emotion-theming": "^11.0.0",
+    "framer-motion": "^3.1.2",
+    "gray-matter": "^4.0.2",
+    "postcss-flexbugs-fixes": "^5.0.2",
+    "postcss-preset-env": "^6.7.0",
+    "remark": "^13.0.0",
+    "remark-html": "^13.0.1",
+    "sass": "^1.32.0"
   }
 }
