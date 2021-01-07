@@ -1,12 +1,10 @@
 import Head from 'next/head'
 import Link from 'next/link'
-import classNames from 'classnames'
 
 import { Box, Heading, Center } from '@chakra-ui/react'
 
 import Layout from '../../components/layout'
 import { ArrowRight, ArrowLeft } from '../../components/svg/Arrow'
-import styles from './[id].module.scss'
 
 import { getAllMonthIds, getMonthData } from '../../lib/months'
 
@@ -44,6 +42,11 @@ const cardHeaderStyling = {
   }
 }
 
+const arrowStyles = {
+  fill: '#353535',
+  position: 'absolute',
+}
+
 export default function Month({ monthData }) {
   const { title, contentHtml, previousMonth, nextMonth } = monthData
 
@@ -58,8 +61,8 @@ export default function Month({ monthData }) {
             {`${title}.`}
           </Heading>
           <div className='contentHtml' dangerouslySetInnerHTML={{ __html: contentHtml }} />
-          {previousMonth && <Link href={`/months/${previousMonth}`}><a><ArrowLeft className={classNames(styles.arrow, styles.arrowLeft)} /></a></Link>}
-          {nextMonth && <Link href={`/months/${nextMonth}`}><a><ArrowRight className={classNames(styles.arrow, styles.arrowRight)} /></a></Link>}
+          {previousMonth && <Link href={`/months/${previousMonth}`}><a><ArrowLeft style={{ ...arrowStyles, left: '-15px' }} /></a></Link>}
+          {nextMonth && <Link href={`/months/${nextMonth}`}><a><ArrowRight style={{ ...arrowStyles, right: '-15px' }} /></a></Link>}
         </Box>
       </Center>
     </Layout>
