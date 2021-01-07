@@ -1,3 +1,4 @@
+# mmt-wellbeing-calendar-app-prototype
 ## Getting Started
 
 First, run the development server:
