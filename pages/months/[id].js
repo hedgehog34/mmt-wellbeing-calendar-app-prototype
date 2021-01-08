@@ -45,6 +45,7 @@ const cardHeaderStyling = {
 const arrowStyles = {
   fill: '#353535',
   position: 'absolute',
+  top: 'calc(50% - (50px / 2))',
 }
 
 export default function Month({ monthData }) {
@@ -56,13 +57,17 @@ export default function Month({ monthData }) {
         <title>{title}</title>
       </Head>
       <Center>
-        <Box maxW='48em' w='100%' p={{ base: '20px', md: `20px ${cardVerticalPadding}` }} background='white' position='relative' minH='400px'>
-          <Heading {...cardHeaderStyling}>
-            {`${title}.`}
-          </Heading>
-          <div className='contentHtml' dangerouslySetInnerHTML={{ __html: contentHtml }} />
-          {previousMonth && <Link href={`/months/${previousMonth}`}><a><ArrowLeft style={{ ...arrowStyles, left: '-15px' }} /></a></Link>}
-          {nextMonth && <Link href={`/months/${nextMonth}`}><a><ArrowRight style={{ ...arrowStyles, right: '-15px' }} /></a></Link>}
+        <Box position='relative' maxW='32em' w='100%'>
+          <Box h='32em' p={{ base: '20px', md: `20px ${cardVerticalPadding}` }} background='white' overflow='hidden'>
+            <Heading {...cardHeaderStyling}>
+              {`${title}.`}
+            </Heading>
+            <div className='contentHtml' dangerouslySetInnerHTML={{ __html: contentHtml }} />
+          </Box>
+          {/* {previousMonth && <Link href={`/months/${previousMonth}`}><a style={{ ...arrowStyles, left: '-28px' }}><ArrowLeft /></a></Link>}
+          {nextMonth && <Link href={`/months/${nextMonth}`}><a style={{ ...arrowStyles, right: '-28px' }}><ArrowRight /></a></Link>} */}
+          {previousMonth && <Link href='/months/[id]' as={`/months/${previousMonth}`}><a style={{ ...arrowStyles, left: '-28px' }}><ArrowLeft /></a></Link>}
+          {nextMonth && <Link href='/months/[id]' as={`/months/${nextMonth}`}><a style={{ ...arrowStyles, right: '-28px' }}><ArrowRight /></a></Link>}
         </Box>
       </Center>
     </Layout>
