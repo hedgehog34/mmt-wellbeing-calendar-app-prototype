@@ -4,8 +4,7 @@ body {
   color: #242424;
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: MetaProSerif, Georgia, 'Times New Roman', Times, serif;
 }
 
 a {
@@ -20,9 +19,15 @@ a {
 .contentHtml {
   & > ul {
     list-style-type: none;
+    font-family: MetaProSerif, Georgia, 'Times New Roman', Times, serif;
+    font-size: 18px;
 
     & > li {
       margin-bottom: 1em;
+
+      & > strong {
+        font-family: MetaProSerifBold, Georgia, 'Times New Roman', Times, serif;
+      }
     }
   }
 }

@@ -17,11 +17,11 @@ const cardHeaderStyling = {
   _after: {
     content: '""',
     display: 'block',
-    height: { base: '52px', md: '60px'},
+    height: { base: '40px', md: '52px'},
     width: '100%',
     background: '#FFD803',
     position: 'absolute',
-    top: { base: 0, md: '4px'},
+    top: 0,
     zIndex: -1,
     transform: 'skewX(-20deg) rotate(-5deg)',
   }
@@ -30,7 +30,8 @@ const cardHeaderStyling = {
 const gridStyles = {
   gap: 5,
   templateColumns: {
-    base: 'repeat(3, 1fr)',
+    base: 'repeat(1, 1fr)',
+    sm: 'repeat(2, 1fr)',
     md: 'repeat(4, 1fr)',
     lg: 'repeat(6, 1fr)',
   }

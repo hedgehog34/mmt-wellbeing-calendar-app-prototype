@@ -13,7 +13,7 @@ const cardVerticalPadding = '40px'
 const cardHeaderStyling = {
   as: 'h2',
   mb: '40px',
-  size: '2xl',
+  size: '3xl',
   fontWeight: 800,
   textTransform: 'uppercase',
   display: 'inline-block',
@@ -22,11 +22,11 @@ const cardHeaderStyling = {
   _before: {
     content: '""',
     display: 'block',
-    height: { base: '24px', md: '32px'},
+    height: { base: '32px', md: '48px'},
     width: { base: 'calc(100% + 20px)', md: `calc(100% + ${cardVerticalPadding})`},
     background: '#FFD803',
     position: 'absolute',
-    top: { base: '25%', md: '12px' },
+    top: '8px',
     left: { base: '-20px', md: '-40px' },
     zIndex: -1,
     transform: 'skewX(-20deg) rotate(-5deg)',
@@ -64,8 +64,6 @@ export default function Month({ monthData }) {
             </Heading>
             <div className='contentHtml' dangerouslySetInnerHTML={{ __html: contentHtml }} />
           </Box>
-          {/* {previousMonth && <Link href={`/months/${previousMonth}`}><a style={{ ...arrowStyles, left: '-28px' }}><ArrowLeft /></a></Link>}
-          {nextMonth && <Link href={`/months/${nextMonth}`}><a style={{ ...arrowStyles, right: '-28px' }}><ArrowRight /></a></Link>} */}
           {previousMonth && <Link href='/months/[id]' as={`/months/${previousMonth}`}><a style={{ ...arrowStyles, left: '-28px' }}><ArrowLeft /></a></Link>}
           {nextMonth && <Link href='/months/[id]' as={`/months/${nextMonth}`}><a style={{ ...arrowStyles, right: '-28px' }}><ArrowRight /></a></Link>}
         </Box>

@@ -1,13 +1,32 @@
+import { useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { ThemeProvider, theme, CSSReset } from '@chakra-ui/react'
+import { ThemeProvider, CSSReset, extendTheme } from '@chakra-ui/react'
+
+import { Fonts } from '../components/Fonts'
+import monthNames from '../constants/monthNames'
 
 import '../styles/globals.scss'
 
+const theme = extendTheme({
+  fonts: {
+    heading: 'MetaProCond',
+  },
+})
+
 function CalendarApp({ Component, pageProps, router }) {
+  useEffect(() => {
+    const { pathname } = router
+    const currentMonthName = monthNames[new Date().getMonth()].toLowerCase()
+    if(pathname === '/' && currentMonthName){
+      router.push(`/months/${currentMonthName}`)
+    }
+  }, [])
+
   return (
     <ThemeProvider theme={theme}>
       <CSSReset />
-      <motion.div key={router.asPath} initial="pageInitial" animate="pageAnimate" variants={{
+      <Fonts />
+      <motion.div key={router.asPath} initial='pageInitial' animate='pageAnimate' variants={{
             pageInitial: {
               opacity: 0
             },
