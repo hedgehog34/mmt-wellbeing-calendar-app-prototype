@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import Link from 'next/link'
 import { Heading, Grid, Square } from '@chakra-ui/react'
+import { motion } from 'framer-motion'
 
 import { getSortedMonthsData } from '../lib/months'
 
@@ -45,29 +46,38 @@ export default function Home({ allMonthsData }) {
         <link rel='icon' href='/favicon.ico' />
       </Head>
 
-      <main>
-        <Grid {...gridStyles}>
-          {allMonthsData.map(({ id, title }) => {
-            const truncatedTitle = `${title.substring(0, 3)}.`
+      <motion.div initial='pageInitial' animate='pageAnimate' variants={{
+        pageInitial: {
+          opacity: 0
+        },
+        pageAnimate: {
+          opacity: 1
+        },
+      }}>
+        <main>
+          <Grid {...gridStyles}>
+            {allMonthsData.map(({ id, title }) => {
+              const truncatedTitle = `${title.substring(0, 3)}.`
 
-            return (
-              <Link href={`/months/${id}`} key={id}>
-                <a>
-                  <Square w='100%' h='200px' bg='white' overflow='visible' isTruncated>
-                    <Heading {...cardHeaderStyling}>
-                      {truncatedTitle}
-                    </Heading>
-                  </Square>
-                </a>
-              </Link>
-            )
-          })}
-        </Grid>
-      </main>
+              return (
+                <Link href={`/months/${id}`} key={id}>
+                  <a>
+                    <Square w='100%' h='200px' bg='white' overflow='visible' isTruncated>
+                      <Heading {...cardHeaderStyling}>
+                        {truncatedTitle}
+                      </Heading>
+                    </Square>
+                  </a>
+                </Link>
+              )
+            })}
+          </Grid>
+        </main>
 
-      <footer>
-        
-      </footer>
+        <footer>
+          
+        </footer>
+      </motion.div>
     </Layout>
   )
 }

@@ -40,7 +40,7 @@ export default function Layout({ children, home }) {
         <Heading as='h2' size='4xl'>
           {currentYear}
         </Heading>
-        <Heading as='h1' size='2xl' mb='10' textTransform='uppercase'>
+        <Heading as='h1' size='xl' mb='10' textTransform='uppercase' lineHeight='1'>
           Wellbeing Calendar
         </Heading>
       </header>
@@ -52,7 +52,7 @@ export default function Layout({ children, home }) {
           <Link href='/'>
             <a>
               <Grid />
-              <Text fontWeight='700' fontSize='16px'>Grid</Text>
+              <Text fontFamily='MetaProCond' fontSize='18px'>Grid</Text>
             </a>
           </Link>
         </Container>
