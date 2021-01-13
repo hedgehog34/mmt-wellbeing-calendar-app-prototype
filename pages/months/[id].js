@@ -52,7 +52,7 @@ const arrowStyles = {
   top: 'calc(50% - (50px / 2))',
 }
 
-const pageVariantFadeIn = {
+const pageVariants = {
   initial: {
     opacity: 0
   },
@@ -64,27 +64,27 @@ const pageVariantFadeIn = {
   }
 }
 
-const pageVariants = {
-  initial: direction => {
-    return {
-      opacity: 0,
-      x: direction > 0 ? '100vw' : '-100vw',
-      scale: 0.8
-    }
-  },
-  in: {
-    opacity: 1,
-    x: 0,
-    scale: 1
-  },
-  out: direction => {
-    return {
-      opacity: 0,
-      x: direction < 0 ? '-100vw' : '100vw',
-      scale: 1.2
-    }
-  }
-}
+// const pageVariants = {
+//   initial: direction => {
+//     return {
+//       opacity: 0,
+//       x: direction > 0 ? '100vw' : '-100vw',
+//       scale: 0.8
+//     }
+//   },
+//   in: {
+//     opacity: 1,
+//     x: 0,
+//     scale: 1
+//   },
+//   out: direction => {
+//     return {
+//       opacity: 0,
+//       x: direction < 0 ? '-100vw' : '100vw',
+//       scale: 1.2
+//     }
+//   }
+// }
 
 const pageTransition = {
   type: 'tween',
