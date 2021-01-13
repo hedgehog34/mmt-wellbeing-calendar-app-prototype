@@ -10,6 +10,7 @@ import styles from './layout.module.scss'
 export const siteTitle = 'MMT Wellbeing Calendar App'
 
 export default function Layout({ children, home }) {
+  const currentYear = new Date().getFullYear()
   return (
     <div className={styles.container}>
       <Head>
@@ -32,14 +33,14 @@ export default function Layout({ children, home }) {
           <Link href='/'>
             <a><Logo className={styles.logo} /></a>
           </Link>
-          <ChakraLink isExternal href='https://www.mmtdigital.co.uk/about' textTransform='uppercase' border='2px' fontWeight='700' p='5px 10px'>
+          <ChakraLink isExternal href='https://www.mmtdigital.co.uk/about' textTransform='uppercase' border='2px' p='3px 10px 0' fontFamily='MetaProCond' _hover={{ textDecoration: 'none' }}>
             About Us
           </ChakraLink>
         </nav>
-        <Heading as='h2' size='4xl' fontWeight='800'>
-          2021
+        <Heading as='h2' size='4xl'>
+          {currentYear}
         </Heading>
-        <Heading as='h1' size='3xl' mb='10' textTransform='uppercase'>
+        <Heading as='h1' size='xl' mb='10' textTransform='uppercase' lineHeight='1'>
           Wellbeing Calendar
         </Heading>
       </header>
@@ -51,7 +52,7 @@ export default function Layout({ children, home }) {
           <Link href='/'>
             <a>
               <Grid />
-              <Text fontWeight='700' fontSize='16px'>Grid</Text>
+              <Text fontFamily='MetaProCond' fontSize='18px'>Grid</Text>
             </a>
           </Link>
         </Container>
