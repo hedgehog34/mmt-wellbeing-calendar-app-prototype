@@ -7,7 +7,7 @@ import { motion } from 'framer-motion'
 import { Box, Heading, Center } from '@chakra-ui/react'
 
 import Layout from '../../components/layout'
-import { ArrowRight, ArrowLeft } from '../../components/svg/Arrow'
+import { Arrow } from '../../components/svg/Arrow'
 
 import { getAllMonthIds, getMonthData } from '../../lib/months'
 
@@ -143,15 +143,15 @@ function Month({ monthData }) {
               </Box>
               {previousMonth && (
                 <Link href={`/months/${previousMonth}`}>
-                  <a style={{ ...arrowStyles, left: '-28px' }} onClick={() => setDirection(-1)}>
-                    <ArrowLeft />
+                  <a style={{ ...arrowStyles, left: '-28px', transform: 'rotate(180deg)' }} onClick={() => setDirection(-1)}>
+                    <Arrow />
                   </a>
                 </Link>
               )}
               {nextMonth && (
                 <Link href={`/months/${nextMonth}`}>
                   <a style={{ ...arrowStyles, right: '-28px' }} onClick={() => setDirection(1)}>
-                    <ArrowRight />
+                    <Arrow />
                   </a>
                 </Link>
               )}
