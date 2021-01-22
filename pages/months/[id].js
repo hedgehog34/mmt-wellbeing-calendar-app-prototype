@@ -3,13 +3,14 @@ import Head from 'next/head'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { motion } from 'framer-motion'
+import format from 'date-fns/format'
 
-import { Box, Heading, Center } from '@chakra-ui/react'
+import { Box, Heading, Center, Text, List, ListItem } from '@chakra-ui/react'
 
 import Layout from '../../components/layout'
 import { Arrow } from '../../components/svg/Arrow'
 
-import { getAllMonthIds, getMonthData } from '../../lib/months'
+import { getAllMonthIds, getMonthDataByMonthId } from '../../lib/months'
 
 
 const cardVerticalPadding = '40px'
@@ -99,7 +100,9 @@ function Month({ monthData }) {
   const [direction, setDirection] = useState(0)
   const router = useRouter()
 
-  const { title, contentHtml, previousMonth, nextMonth } = monthData
+  // console.log(monthData)
+
+  const { name, previousMonth, nextMonth, events } = monthData
 
   const handleSwipe = direction => {
     const href = direction === 1 ? `/months/${nextMonth}` : direction === -1 ? `/months/${previousMonth}` : undefined
@@ -109,10 +112,10 @@ function Month({ monthData }) {
   return (
     <Layout>
       <Head>
-        <title>{title}</title>
+        <title>{name}</title>
       </Head>
       <motion.div
-        key={title}
+        key={name}
         initial='initial'
         animate='in'
         exit='out'
@@ -137,9 +140,21 @@ function Month({ monthData }) {
             <Box position='relative' maxW='32em' w='100%'>
               <Box h='32em' p={{ base: '20px', md: `20px ${cardVerticalPadding}` }} background='white' overflow='hidden'>
                 <Heading {...cardHeaderStyling}>
-                  {`${title}.`}
+                  {`${name}.`}
                 </Heading>
-                <div className='contentHtml' dangerouslySetInnerHTML={{ __html: contentHtml }} />
+                <List spacing={3}>
+                  {events.map(event => {
+                    const { title, description, location, startsAt, endsAt } = event
+                    const formattedStartsAt = format(new Date(startsAt), 'do')
+                    const formattedEndsAt = format(new Date(endsAt), 'do')
+                    return (
+                      <ListItem fontSize='xl' fontFamily='MetaProSerif' key={title}>
+                        <Text fontFamily='MetaProSerifBold'>{formattedStartsAt}{endsAt && formattedStartsAt !== formattedEndsAt && ` - ${format(new Date(endsAt), 'do')}`}</Text>
+                        <div className='contentHtml' dangerouslySetInnerHTML={{ __html: description }} />
+                      </ListItem>
+                    )
+                  })}
+                </List>
               </Box>
               {previousMonth && (
                 <Link href={`/months/${previousMonth}`}>
@@ -165,7 +180,7 @@ function Month({ monthData }) {
 export default Month
 
 export async function getStaticPaths() {
-  const paths = getAllMonthIds()
+  const paths = await getAllMonthIds()
   return {
     paths,
     fallback: false
@@ -173,10 +188,10 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  const monthData = await getMonthData(params.id)
+  const monthData = await getMonthDataByMonthId(params.id)
   return {
     props: {
-      monthData
+      monthData,
     }
   }
 }

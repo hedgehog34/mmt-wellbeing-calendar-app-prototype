@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { Heading, Grid, Square } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
 
-import { getSortedMonthsData } from '../lib/months'
+import { getAllMonthNames } from '../lib/months'
 
 import Layout, { siteTitle } from '../components/layout'
 
@@ -38,7 +38,7 @@ const gridStyles = {
   }
 }
 
-export default function Home({ allMonthsData }) {
+export default function Home({ allMonthNames }) {
   return (
     <Layout home>
       <Head>
@@ -56,11 +56,11 @@ export default function Home({ allMonthsData }) {
       }}>
         <main>
           <Grid {...gridStyles}>
-            {allMonthsData.map(({ id, title }) => {
-              const truncatedTitle = `${title.substring(0, 3)}.`
+            {allMonthNames.map(({ name }, index) => {
+              const truncatedTitle = `${name.substring(0, 3)}.`
 
               return (
-                <Link href={`/months/${id}`} key={id}>
+                <Link href={`/months/${name}`} key={`${name}-${index}`}>
                   <a>
                     <Square w='100%' h='200px' bg='white' overflow='visible' isTruncated>
                       <Heading {...cardHeaderStyling}>
@@ -82,11 +82,11 @@ export default function Home({ allMonthsData }) {
   )
 }
 
-export async function getStaticProps() {
-  const allMonthsData = getSortedMonthsData()
+export async function getStaticProps({ preview = false }) {
+  const allMonthNames = await getAllMonthNames(preview)
   return {
     props: {
-      allMonthsData
+      allMonthNames
     }
   }
 }

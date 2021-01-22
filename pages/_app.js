@@ -16,7 +16,7 @@ function CalendarApp({ Component, pageProps, router }) {
   // Redirect to page corresponding to currentMonth
   useEffect(() => {
     const { pathname } = router
-    const currentMonthName = monthNames[new Date().getMonth()].toLowerCase()
+    const currentMonthName = monthNames[new Date().getMonth()]
     if(pathname === '/' && currentMonthName){
       router.push(`/months/${currentMonthName}`)
     }
