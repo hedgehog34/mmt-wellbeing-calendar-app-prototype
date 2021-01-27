@@ -4,8 +4,10 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { motion } from 'framer-motion'
 import format from 'date-fns/format'
+import AddToCalendar from '@culturehq/add-to-calendar'
+import '@culturehq/add-to-calendar/dist/styles.css'
 
-import { Box, Heading, Center, Text, List, ListItem } from '@chakra-ui/react'
+import { Box, Heading, Center, Text, List, ListItem, Flex } from '@chakra-ui/react'
 
 import Layout from '../../components/layout'
 import { Arrow } from '../../components/svg/Arrow'
@@ -144,13 +146,21 @@ function Month({ monthData }) {
                 </Heading>
                 <List spacing={3}>
                   {events.map(event => {
-                    const { title, description, location, startsAt, endsAt } = event
+                    const { name, details, location, startsAt, endsAt } = event
                     const formattedStartsAt = format(new Date(startsAt), 'do')
                     const formattedEndsAt = format(new Date(endsAt), 'do')
                     return (
-                      <ListItem fontSize='xl' fontFamily='MetaProSerif' key={title}>
-                        <Text fontFamily='MetaProSerifBold'>{formattedStartsAt}{endsAt && formattedStartsAt !== formattedEndsAt && ` - ${format(new Date(endsAt), 'do')}`}</Text>
-                        <div className='contentHtml' dangerouslySetInnerHTML={{ __html: description }} />
+                      <ListItem fontSize='xl' fontFamily='MetaProSerif' key={name}>
+                        <Flex>
+                          <AddToCalendar event={{
+                            ...event,
+                            details: details.replace(/<[^>]*>?/gm, ''),
+                          }}>
+                            {''}
+                          </AddToCalendar>
+                          <Text fontFamily='MetaProSerifBold'>{formattedStartsAt}{endsAt && formattedStartsAt !== formattedEndsAt && ` - ${format(new Date(endsAt), 'do')}`}</Text>
+                        </Flex>
+                        <div className='contentHtml' dangerouslySetInnerHTML={{ __html: details }} />
                       </ListItem>
                     )
                   })}

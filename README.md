@@ -41,6 +41,6 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
 
 # TODO:
-- integration with some lightweight (headless) CMS (Contentful, Kontent), and getting data from there instead of MD files
+- ~~integration with some lightweight (headless) CMS (Contentful, Kontent), and getting data from there instead of MD files~~
 - add events to calendar functionality [small package to do so](https://reactjsexample.com/a-small-package-for-adding-an-event-to-a-calendar/)
-- adding MMT webfonts to the project
+- ~~adding MMT webfonts to the project~~

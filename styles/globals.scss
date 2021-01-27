@@ -31,3 +31,20 @@ a {
     }
   }
 }
+
+// Add to calendar package overrides
+.chq-atc {
+  fill: currentColor !important;
+}
+
+.chq-atc--dropdown {
+  width: auto !important;
+}
+
+.chq-atc--dropdown a {
+  color: currentColor !important;
+}
+
+.chq-atc--button {
+  padding-left: 0 !important;
+}
