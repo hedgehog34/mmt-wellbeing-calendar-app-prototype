@@ -137,7 +137,7 @@ function Month({ monthData }) {
         }}>
           <Center>
             <Box position='relative' maxW='32em' w='100%'>
-              <Box h='32em' p={{ base: '20px', md: `20px ${cardVerticalPadding}` }} background='white' overflow='hidden'>
+              <Box h='32em' p={{ base: '20px', md: `20px ${cardVerticalPadding}` }} background='white'>
                 <Heading {...cardHeaderStyling}>
                   {`${name}.`}
                 </Heading>
