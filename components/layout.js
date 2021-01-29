@@ -9,6 +9,15 @@ import styles from './layout.module.scss'
 
 export const siteTitle = 'MMT Wellbeing Calendar App'
 
+const homeButtonStyles = {
+  m: '20px auto',
+  position: 'fixed',
+  bottom: 0,
+  right: 0,
+  left: 0,
+  width: '100%',
+}
+
 export default function Layout({ children, home }) {
   const currentYear = new Date().getFullYear()
   return (
@@ -48,7 +57,7 @@ export default function Layout({ children, home }) {
         {children}
       </main>
       {!home && (
-        <Container mt='20px' centerContent>
+        <Container mt='20px' {...homeButtonStyles} centerContent>
           <Link href='/'>
             <a>
               <Grid />
