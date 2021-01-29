@@ -8,6 +8,7 @@ import format from 'date-fns/format'
 import { Box, Heading, Center, Text, List, ListItem } from '@chakra-ui/react'
 
 import Layout from '../../components/layout'
+import { CardContent } from '../../components/CardContent'
 import { Arrow } from '../../components/svg/Arrow'
 
 import { getAllMonthIds, getMonthDataByMonthId } from '../../lib/months'
@@ -100,8 +101,6 @@ function Month({ monthData }) {
   const [direction, setDirection] = useState(0)
   const router = useRouter()
 
-  // console.log(monthData)
-
   const { name, previousMonth, nextMonth, events } = monthData
 
   const handleSwipe = direction => {
@@ -142,19 +141,7 @@ function Month({ monthData }) {
                 <Heading {...cardHeaderStyling}>
                   {`${name}.`}
                 </Heading>
-                <List spacing={3}>
-                  {events.map(event => {
-                    const { title, description, location, startsAt, endsAt } = event
-                    const formattedStartsAt = format(new Date(startsAt), 'do')
-                    const formattedEndsAt = format(new Date(endsAt), 'do')
-                    return (
-                      <ListItem fontSize='xl' fontFamily='MetaProSerif' key={title}>
-                        <Text fontFamily='MetaProSerifBold'>{formattedStartsAt}{endsAt && formattedStartsAt !== formattedEndsAt && ` - ${format(new Date(endsAt), 'do')}`}</Text>
-                        <div className='contentHtml' dangerouslySetInnerHTML={{ __html: description }} />
-                      </ListItem>
-                    )
-                  })}
-                </List>
+                <CardContent events={events} fontSize='xl' />
               </Box>
               {previousMonth && (
                 <Link href={`/months/${previousMonth}`}>
