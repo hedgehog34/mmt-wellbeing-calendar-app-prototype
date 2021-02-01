@@ -113,36 +113,37 @@ function Month({ monthData }) {
       <Head>
         <title>{name}</title>
       </Head>
-      <motion.div
-        key={name}
-        initial='initial'
-        animate='in'
-        exit='out'
-        custom={direction}
-        variants={pageVariants}
-        transition={pageTransition}
-        drag='x'
-        dragConstraints={{ left: 0, right: 0 }}
-        dragElastic={1}
-        onDragEnd={(e, { offset, velocity }) => {
-          const swipe = swipePower(offset.x, velocity.x);
-
-          if (swipe < -swipeConfidenceThreshold) {
-            setDirection(1)
-            handleSwipe(1)
-          } else if (swipe > swipeConfidenceThreshold) {
-            setDirection(-1)
-            handleSwipe(-1)
-          }
-        }}>
           <Center>
             <Box position='relative' maxW='32em' w='100%'>
-              <Box h='32em' p={{ base: '20px', md: `20px ${cardVerticalPadding}` }} background='white'>
-                <Heading {...cardHeaderStyling}>
-                  {`${name}.`}
-                </Heading>
-                <CardContent events={events} fontSize='xl' />
-              </Box>
+              <motion.div
+                key={name}
+                initial='initial'
+                animate='in'
+                exit='out'
+                custom={direction}
+                variants={pageVariants}
+                transition={pageTransition}
+                drag='x'
+                dragConstraints={{ left: 0, right: 0 }}
+                dragElastic={1}
+                onDragEnd={(e, { offset, velocity }) => {
+                  const swipe = swipePower(offset.x, velocity.x);
+
+                  if (swipe < -swipeConfidenceThreshold) {
+                    setDirection(1)
+                    handleSwipe(1)
+                  } else if (swipe > swipeConfidenceThreshold) {
+                    setDirection(-1)
+                    handleSwipe(-1)
+                  }
+                }}>
+                <Box h='32em' p={{ base: '20px', md: `20px ${cardVerticalPadding}` }} background='white'>
+                  <Heading {...cardHeaderStyling}>
+                    {`${name}.`}
+                  </Heading>
+                  <CardContent events={events} fontSize='xl' />
+                </Box>
+              </motion.div>
               {previousMonth && (
                 <Link href={`/months/${previousMonth}`}>
                   <a style={{ ...arrowStyles, left: '-28px', transform: 'rotate(180deg)' }} onClick={() => setDirection(-1)}>
@@ -159,7 +160,6 @@ function Month({ monthData }) {
               )}
             </Box>
           </Center>
-        </motion.div>
     </Layout>
   )
 }
